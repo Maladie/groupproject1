@@ -1,10 +1,7 @@
 package pl.sdacademy.model;
 
 
-import javax.persistence.Embedded;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -30,6 +27,9 @@ public class Client {
     @Min(value = 1)
     @Max(value = 100)
     Integer age;
+
+    @ManyToMany
+    List<Car> interestedCarList;
 
     public int getId() {
         return id;
