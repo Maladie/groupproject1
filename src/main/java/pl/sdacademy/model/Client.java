@@ -48,4 +48,20 @@ public class Client {
     public Integer getAge() {
         return age;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
 }
