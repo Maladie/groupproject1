@@ -22,6 +22,15 @@ public class ClientService {
        clientRepository.save(client);
     }
 
+    public void updateClient(Client client){
+        Client clientToUpdate = clientRepository.findById(client.getId());
+        clientToUpdate.setName(client.getName());
+        clientToUpdate.setSurname(client.getSurname());
+        clientToUpdate.setAddress(client.getAddress());
+        clientToUpdate.setAge(client.getAge());
+        clientRepository.save(clientToUpdate);
+    }
+
     public List<Client> findByAll (){
         return clientRepository.findAll();
     }
@@ -35,8 +44,4 @@ public class ClientService {
         return clientRepository.findByAddressCity(city);
 
     }
-
-
-
-
 }
