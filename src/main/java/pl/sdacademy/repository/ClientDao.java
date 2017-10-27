@@ -16,4 +16,8 @@ public class ClientDao {
     public void saveClient(Client client) {
         entityManager.persist(client);
     }
+
+    public void updateClient(Client client) {
+        entityManager.merge(client);
+    }
 }
