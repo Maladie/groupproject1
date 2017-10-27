@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 
 public class Car {
 
+
     private Integer id;
     @NotNull
     private String company;
