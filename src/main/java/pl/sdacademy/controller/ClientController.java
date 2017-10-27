@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.sdacademy.model.Client;
+import pl.sdacademy.model.ClientDto;
 import pl.sdacademy.service.ClientService;
 
 import javax.validation.Valid;
@@ -21,17 +22,17 @@ public class ClientController {
     }
 
     @RequestMapping(value = "/findAll",method = RequestMethod.GET)
-    public List<Client> findByAll (){
+    public List<ClientDto> findByAll (){
        return clientService.findByAll();
     }
 
     @RequestMapping(value = "/findSurname",method = RequestMethod.GET)
-    public List<Client> findBySurname (@RequestParam(value = "surname") String surname){
+    public List<ClientDto> findBySurname (@RequestParam(value = "surname") String surname){
         return clientService.findBySurname(surname);
     }
 
     @RequestMapping(value = "/findCity",method = RequestMethod.GET)
-    public List<Client> findByCity (@RequestParam(value = "city") String city){
+    public List<ClientDto> findByCity (@RequestParam(value = "city") String city){
         return clientService.findByCity(city);
     }
 
@@ -46,5 +47,4 @@ public class ClientController {
         clientService.updateClient(client);
         return new ResponseEntity<Client>(client, HttpStatus.CREATED);
     }
-
 }
