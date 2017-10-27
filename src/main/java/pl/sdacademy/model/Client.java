@@ -72,5 +72,16 @@ public class Client {
         this.age = age;
     }
 
+    public ClientDto convertToDto(){
+        ClientDto.ClientDtoBuilder dtoBuilder = new ClientDto.ClientDtoBuilder();
+        ClientDto clientDto = dtoBuilder.addName(name)
+                .addSurname(surname)
+                .addAge(age)
+                .addAddress(address)
+                .addBookedCars(interestedCarList)
+                .build();
+        return clientDto;
+    }
+
 
 }

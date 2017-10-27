@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.sdacademy.model.Car;
 import pl.sdacademy.model.Client;
+import pl.sdacademy.model.ClientDto;
 import pl.sdacademy.repository.ClientRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,18 +25,28 @@ public class ClientService {
        clientRepository.save(client);
     }
 
-    public List<Client> findByAll (){
-        return clientRepository.findAll();
+    public void updateClient(Client client){
+        Client clientToUpdate = clientRepository.findById(client.getId());
+        clientToUpdate.setName(client.getName());
+        clientToUpdate.setSurname(client.getSurname());
+        clientToUpdate.setAddress(client.getAddress());
+        clientToUpdate.setAge(client.getAge());
+        clientRepository.save(clientToUpdate);
     }
 
-    public List<Client> findBySurname (String surname){
-        return clientRepository.findBySurname(surname);
-
+    public List<ClientDto> findByAll (){
+        List<Client> clients = clientRepository.findAll();
+        return convertToDtoList(clients);
     }
 
-    public List<Client> findByCity (String city){
-        return clientRepository.findByAddressCity(city);
+    public List<ClientDto> findBySurname (String surname){
+        List<Client> clients = clientRepository.findBySurname(surname);
+        return convertToDtoList(clients);
+    }
 
+    public List<ClientDto> findByCity (String city){
+        List<Client> clients = clientRepository.findByAddressCity(city);
+        return convertToDtoList(clients);
     }
 
     public void addCarToClient(Car car, int clientId){
@@ -45,4 +57,11 @@ public class ClientService {
 
 
 
+    private List<ClientDto> convertToDtoList(List<Client> clients){
+        List<ClientDto> clientDtos = new ArrayList<>();
+        clientRepository.findAll().forEach(client -> {
+            ClientDto clientDto=  client.convertToDto();
+            clientDtos.add(clientDto);});
+        return clientDtos;
+    }
 }
