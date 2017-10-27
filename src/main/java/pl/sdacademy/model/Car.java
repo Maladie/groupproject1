@@ -77,4 +77,9 @@ public class Car {
     public void setReserved(boolean reserved) {
         isReserved = reserved;
     }
+
+    @Override
+    public String toString() {
+        return company + " " + model + ", " + engineSize + " cm3, fuel: " + type;
+    }
 }
