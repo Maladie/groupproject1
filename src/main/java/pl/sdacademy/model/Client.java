@@ -30,7 +30,7 @@ public class Client {
     Integer age;
 
     @OneToMany
-    Set<Car> interestedCarList;
+    List<Car> interestedCarList;
 
     public void addCarToList(Car car){
         interestedCarList.add(car);
