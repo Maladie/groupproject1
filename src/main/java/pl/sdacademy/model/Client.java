@@ -1,5 +1,51 @@
 package pl.sdacademy.model;
 
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+@javax.persistence.Entity
 public class Client {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @NotNull
+    @Size(min = 2)
+    String name;
+
+    @NotNull
+    String surname;
+
+    @NotNull
+    Address address;
+
+    @Min(value = 1)
+    @Max(value = 100)
+    Integer age;
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
 }
