@@ -1,6 +1,7 @@
 package pl.sdacademy.model;
 
 
+import javax.persistence.Embedded;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,6 +23,7 @@ public class Client {
     @NotNull
     String surname;
 
+    @Embedded
     @NotNull
     Address address;
 
