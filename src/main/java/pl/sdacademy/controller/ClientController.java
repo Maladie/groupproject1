@@ -18,33 +18,25 @@ import java.util.List;
 public class ClientController {
 
     private ClientService clientService;
-    private ClientDao clientDao;
-    private ClientRepository clientRepository;
-
 
     @Autowired
-    public ClientController(ClientService clientService, ClientDao clientDao, ClientRepository clientRepository) {
+    public ClientController(ClientService clientService) {
         this.clientService = clientService;
-        this.clientDao = clientDao;
-        this.clientRepository = clientRepository;
     }
-
 
     @RequestMapping(value = "/findAll",method = RequestMethod.GET)
     public List<Client> findByAll (){
-        return clientRepository.findAll();
+       return clientService.findByAll();
     }
 
     @RequestMapping(value = "/findSurname",method = RequestMethod.GET)
     public List<Client> findBySurname (@RequestParam(value = "surname") String surname){
-        return clientRepository.findBySurname(surname);
-
+        return clientService.findBySurname(surname);
     }
 
     @RequestMapping(value = "/findCity",method = RequestMethod.GET)
     public List<Client> findByCity (@RequestParam(value = "city") String city){
-       return clientRepository.findByAddressCity(city);
-
+        return clientService.findByCity(city);
     }
 
 
