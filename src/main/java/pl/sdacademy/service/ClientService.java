@@ -54,10 +54,7 @@ public class ClientService {
         client.addCarToList(car);
         clientRepository.save(client);
     }
-
-
-
-
+    
     private List<ClientDto> convertToDtoList(List<Client> clients){
         List<ClientDto> clientDtos = new ArrayList<>();
         clientRepository.findAll().forEach(client -> {
