@@ -1,5 +1,5 @@
 package pl.sdacademy.model;
 
-public class Patient {
+public class Client {
     private int id;
 }
