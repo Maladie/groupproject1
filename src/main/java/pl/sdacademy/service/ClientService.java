@@ -2,6 +2,7 @@ package pl.sdacademy.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.sdacademy.model.Car;
 import pl.sdacademy.model.Client;
 import pl.sdacademy.repository.ClientRepository;
 
@@ -34,6 +35,11 @@ public class ClientService {
     public List<Client> findByCity (String city){
         return clientRepository.findByAddressCity(city);
 
+    }
+
+    public void addCarToClient(Car car, int clientId){
+        Client client = clientRepository.findById(clientId);
+        client.addCarToList(car);
     }
 
 

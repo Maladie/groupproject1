@@ -7,6 +7,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
+import java.util.Set;
 
 @javax.persistence.Entity
 public class Client {
@@ -29,7 +30,11 @@ public class Client {
     Integer age;
 
     @OneToMany
-    List<Car> interestedCarList;
+    Set<Car> interestedCarList;
+
+    public void addCarToList(Car car){
+        interestedCarList.add(car);
+    }
 
     public int getId() {
         return id;
