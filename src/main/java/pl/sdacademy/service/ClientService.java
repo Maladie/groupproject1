@@ -52,6 +52,7 @@ public class ClientService {
     public void addCarToClient(Car car, int clientId){
         Client client = clientRepository.findById(clientId);
         client.addCarToList(car);
+        clientRepository.save(client);
     }
 
 
