@@ -7,9 +7,10 @@ import pl.sdacademy.model.Client;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
 @Repository
-@Transactional
+@javax.transaction.Transactional
 public class ClientDao {
 
     @PersistenceContext
