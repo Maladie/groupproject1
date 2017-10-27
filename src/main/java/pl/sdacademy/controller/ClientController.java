@@ -1,10 +1,8 @@
 package pl.sdacademy.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import pl.sdacademy.model.Car;
 import pl.sdacademy.model.Client;
 import pl.sdacademy.service.ClientService;
 
@@ -34,6 +32,12 @@ public class ClientController {
     public List<Client> findByCity (@RequestParam(value = "city") String city){
         return clientService.findByCity(city);
     }
+
+    @RequestMapping(value = "/addCar",method = RequestMethod.POST)
+    public void addCar(@RequestBody Car car, @RequestParam(value = "id") Integer clientId){
+       clientService.addCarToClient(car,clientId);
+    }
+
 
 
 }
