@@ -6,6 +6,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @javax.persistence.Entity
 public class Client {
@@ -66,4 +67,6 @@ public class Client {
     public void setAge(Integer age) {
         this.age = age;
     }
+
+
 }
