@@ -22,14 +22,13 @@ public class Client {
     String surname;
 
     @Embedded
-    @NotNull
     Address address;
 
     @Min(value = 1)
     @Max(value = 100)
     Integer age;
 
-    @ManyToMany
+    @OneToMany
     List<Car> interestedCarList;
 
     public int getId() {
