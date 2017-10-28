@@ -62,4 +62,9 @@ public class ClientService {
             clientDtos.add(clientDto);});
         return clientDtos;
     }
+
+    public void saveClientList(List<Client> clients){
+        clientRepository.save(clients);
+    }
+
 }

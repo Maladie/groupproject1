@@ -14,7 +14,9 @@ import pl.sdacademy.model.Address;
 import pl.sdacademy.model.Car;
 import pl.sdacademy.model.Client;
 import pl.sdacademy.model.ClientDto;
+import pl.sdacademy.repository.CarRepository;
 import pl.sdacademy.repository.ClientRepository;
+import pl.sdacademy.service.CarService;
 import pl.sdacademy.service.ClientService;
 
 import javax.validation.Valid;
@@ -26,9 +28,12 @@ public class ClientController {
 
     private ClientService clientService;
 
+    private CarService carService;
+
     @Autowired
-    public ClientController(ClientService clientService) {
+    public ClientController(ClientService clientService, CarService carService) {
         this.clientService = clientService;
+        this.carService = carService;
     }
 
     @RequestMapping(value = "/findAll",method = RequestMethod.GET)
@@ -47,8 +52,8 @@ public class ClientController {
     }
 
     @RequestMapping(value = "/mockbase", method = RequestMethod.POST)
-    public void initializeDatabase(List<Client> clients){
-        clients.clear();
+    public void initializeDatabase(){
+        List<Client> clients = new ArrayList<>();
         List<Car> cars = new ArrayList<Car>();
         Car car1 = new Car("audi", "a3", 2000, "Benzyna");
         cars.add(car1);
@@ -58,32 +63,33 @@ public class ClientController {
         cars.add(car3);
         Car car4 = new Car("mercedes", "A class", 1900, "Gas+Benzyna");
         cars.add(car4);
+
         Client client1 = new Client("Antek", "Hassan", new Address("Moniuszki", 7, 69, "43-987", "Katowice"), 34, cars);
         clients.add(client1);
-        Client client2 = new Client("Antek", "Hassan", new Address("Moniuszki", 7, 69, "43-987", "Katowice"), 34, cars);
+        Client client2 = new Client("Antek1", "Hassan", new Address("Moniuszki", 7, 69, "43-987", "Katowice"), 34, cars);
         clients.add(client2);
-        Client client3 = new Client("Antek", "Hassan", new Address("Moniuszki", 7, 69, "43-987", "Katowice"), 34, cars);
+        Client client3 = new Client("Antek2", "Hassan", new Address("Moniuszki", 7, 69, "43-987", "Katowice"), 34, cars);
         clients.add(client3);
-        Client client4 = new Client("Antek", "Hassan", new Address("Moniuszki", 7, 69, "43-987", "Katowice"), 34, cars);
+        Client client4 = new Client("Antek3", "Hassan", new Address("Moniuszki", 7, 69, "43-987", "Katowice"), 34, cars);
         clients.add(client4);
-        Client client5 = new Client("Antek", "Hassan", new Address("Moniuszki", 7, 69, "43-987", "Katowice"), 34, cars);
+        Client client5 = new Client("Antek4", "Hassan", new Address("Moniuszki", 7, 69, "43-987", "Katowice"), 34, cars);
         clients.add(client5);
-        Client client6 = new Client("Antek", "Hassan", new Address("Moniuszki", 7, 69, "43-987", "Katowice"), 34, cars);
+        Client client6 = new Client("Antek5", "Hassan", new Address("Moniuszki", 7, 69, "43-987", "Katowice"), 34, cars);
         clients.add(client6);
-        Client client7 = new Client("Antek", "Hassan", new Address("Moniuszki", 7, 69, "43-987", "Katowice"), 34, cars);
+        Client client7 = new Client("Antek6", "Hassan", new Address("Moniuszki", 7, 69, "43-987", "Katowice"), 34, cars);
         clients.add(client7);
-        Client client8 = new Client("Antek", "Hassan", new Address("Moniuszki", 7, 69, "43-987", "Katowice"), 34, cars);
+        Client client8 = new Client("Antek7", "Hassan", new Address("Moniuszki", 7, 69, "43-987", "Katowice"), 34, cars);
         clients.add(client8);
-        Client client9 = new Client("Antek", "Hassan", new Address("Moniuszki", 7, 69, "43-987", "Katowice"), 34, cars);
+        Client client9 = new Client("Antek8", "Hassan", new Address("Moniuszki", 7, 69, "43-987", "Katowice"), 34, cars);
         clients.add(client9);
-        Client client10 = new Client("Antek", "Hassan", new Address("Moniuszki", 7, 69, "43-987", "Katowice"), 34, cars);
+        Client client10 = new Client("Antek9", "Hassan", new Address("Moniuszki", 7, 69, "43-987", "Katowice"), 34, cars);
         clients.add(client10);
-        Client client11 = new Client("Antek", "Hassan", new Address("Moniuszki", 7, 69, "43-987", "Katowice"), 34, cars);
+        Client client11 = new Client("Antek10", "Hassan", new Address("Moniuszki", 7, 69, "43-987", "Katowice"), 34, cars);
         clients.add(client11);
-        Client client12 = new Client("Antek", "Hassan", new Address("Moniuszki", 7, 69, "43-987", "Katowice"), 34, cars);
+        Client client12 = new Client("Antek11", "Hassan", new Address("Moniuszki", 7, 69, "43-987", "Katowice"), 34, cars);
         clients.add(client12);
-
-
+        carService.saveCarsList(cars);
+        clientService.saveClientList(clients);
     }
     @RequestMapping(value = "/addCar",method = RequestMethod.POST)
     public void addCar(@RequestBody Car car, @RequestParam(value = "id") Integer clientId){
