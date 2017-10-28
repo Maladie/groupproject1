@@ -67,4 +67,7 @@ public class ClientService {
         clientRepository.save(clients);
     }
 
+    public Client findById(Integer clientId) {
+        return clientRepository.findById(clientId);
+    }
 }

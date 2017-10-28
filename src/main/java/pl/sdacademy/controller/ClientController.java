@@ -6,10 +6,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import pl.sdacademy.model.Address;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
+import pl.sdacademy.model.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import pl.sdacademy.model.Car;
 import pl.sdacademy.model.Client;
 import pl.sdacademy.model.ClientDto;
 import pl.sdacademy.model.test.Stocks;
+import pl.sdacademy.repository.CarRepository;
+import pl.sdacademy.repository.ClientRepository;
 import pl.sdacademy.service.CarService;
 import pl.sdacademy.service.ClientService;
 
@@ -80,17 +89,37 @@ public class ClientController {
        clientService.addCarToClient(car,clientId);
     }
 
+
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public ResponseEntity<Client> createClient(@RequestBody @Valid Client client){
         clientService.persistClient(client);
-        return new ResponseEntity<Client>(client, HttpStatus.CREATED);
+        return new ResponseEntity<>(client, HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public ResponseEntity<Client> updateClient(@RequestBody @Valid Client client){
+    public ResponseEntity<Client> updateClient(@Valid  @RequestBody Client client){
         clientService.updateClient(client);
         return new ResponseEntity<Client>(client, HttpStatus.CREATED);
     }
+
+    @RequestMapping(value = "/addCar", method = RequestMethod.POST)
+    public ResponseEntity<Car> addCar(@Valid @RequestBody AddCarRequest carRequest){
+        RestTemplate restTemplate = new RestTemplate();
+        String fooResourceUrl = "DOWYSLANIA/getCar/" + carRequest.getCarId();
+        Car car = restTemplate
+                .getForObject(fooResourceUrl, Car.class);
+
+        if (!car.isReserved()) {
+            carService.persistCar(car);
+
+            clientService.addCarToClient(car, carRequest.getClientId());
+
+            String fooResourceUrl2 = "REZERWOWANY SAMOCHOD" + carRequest.getCarId();
+        }
+
+        return restTemplate.getForEntity(fooResourceUrl, Car.class);
+    }
+  }
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public ResponseEntity<Stocks> test(){
