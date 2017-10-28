@@ -71,7 +71,7 @@ public class ClientController {
         clients.add(client12);
         clientService.saveClientList(clients);
     }
-    
+
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public ResponseEntity<Client> createClient(@RequestBody @Valid Client client){
         clientService.persistClient(client);
@@ -87,19 +87,21 @@ public class ClientController {
     @RequestMapping(value = "/addCar", method = RequestMethod.POST)
     public ResponseEntity<Car> addCar(@Valid @RequestBody AddCarRequest carRequest){
         RestTemplate restTemplate = new RestTemplate();
-        String fooResourceUrl = "DOWYSLANIA/getCar/" + carRequest.getCarId();
+        String fooResourceUrl = "http://localhost:8088/getCarById/";
         Car car = restTemplate
-                .getForObject(fooResourceUrl, Car.class);
+                .getForObject(fooResourceUrl + carRequest.getCarId(), Car.class);
 
         if (!car.isReserved()) {
             carService.persistCar(car);
 
             clientService.addCarToClient(car, carRequest.getClientId());
 
-            String fooResourceUrl2 = "REZERWOWANY SAMOCHOD" + carRequest.getCarId();
+            String fooResourceUrl2 = "http://localhost:8088/reserveCar?id=" + carRequest.getCarId();
+
+            restTemplate.put(fooResourceUrl2,null);
         }
 
-        return restTemplate.getForEntity(fooResourceUrl, Car.class);
+        return restTemplate.getForEntity(fooResourceUrl+carRequest.getCarId(), Car.class);
     }
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)

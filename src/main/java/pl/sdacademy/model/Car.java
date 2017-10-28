@@ -36,6 +36,9 @@ public class Car {
         isReserved = false;
     }
 
+    public Car() {
+    }
+
     public Integer getId() {
         return id;
     }

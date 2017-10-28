@@ -1,8 +1,5 @@
 package pl.sdacademy.model;
 
-/**
- * Created by RENT on 2017-10-28.
- */
 public class AddCarRequest {
 
     Integer carId;
