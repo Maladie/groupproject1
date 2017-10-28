@@ -7,7 +7,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
-import java.util.Set;
 
 @javax.persistence.Entity
 public class Client {
@@ -90,5 +89,8 @@ public class Client {
         this.address = address;
         this.age = age;
         this.interestedCarList = interestedCarList;
+    }
+
+    public Client() {
     }
 }
