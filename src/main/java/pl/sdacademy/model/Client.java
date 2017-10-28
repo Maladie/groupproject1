@@ -84,4 +84,11 @@ public class Client {
     }
 
 
+    public Client(String name, String surname, Address address, Integer age, List<Car> interestedCarList) {
+        this.name = name;
+        this.surname = surname;
+        this.address = address;
+        this.age = age;
+        this.interestedCarList = interestedCarList;
+    }
 }
