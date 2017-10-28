@@ -21,4 +21,8 @@ public class CarService {
         carRepository.save(carList);
     }
 
+    public void persistCar(Car car){
+        carRepository.save(car);
+    }
+
 }
